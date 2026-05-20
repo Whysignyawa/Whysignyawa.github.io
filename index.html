@@ -1,51 +1,400 @@
 <!DOCTYPE html>
-<html lang="ms">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>T40sugS1gn1 | Digital Identity</title>
-    <style>
-        body { background-color: #000; color: #0f0; font-family: 'Courier New', Courier, monospace; margin: 0; overflow: hidden; display: flex; flex-direction: column; min-height: 100vh; }
-        canvas { position: fixed; top: 0; left: 0; z-index: -1; opacity: 0.3; }
-        .container { display: flex; flex-wrap: wrap; padding: 20px; gap: 20px; justify-content: center; align-items: flex-start; margin-top: 50px; }
-        .section { background: rgba(0, 15, 0, 0.85); border: 1px solid #0f0; box-shadow: 0 0 15px rgba(0, 255, 0, 0.2); padding: 25px; width: 350px; position: relative; }
-        h2 { text-align: center; color: #fff; text-transform: uppercase; border-bottom: 1px solid #0f0; }
-        .value { color: #0f0; font-weight: bold; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Official Whysign | Cybersecurity</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  background:#000;
+  color:#00ff00;
+  font-family:'Courier New',monospace;
+}
+/* Matrix rain canvas */
+canvas {
+  position:fixed;
+  top:0; left:0;
+  z-index:0;
+  opacity:0.3;
+}
+.container {
+  position:relative;
+  z-index:1;
+  max-width:900px;
+  margin:0 auto;
+  padding:20px;
+}
+/* Navigation */
+nav {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:20px 0;
+  border-bottom:1px solid #00ff00;
+}
+.logo {
+  font-size:24px;
+  font-weight:bold;
+  color:#00ff00;
+  text-shadow:0 0 10px #00ff00;
+}
+.nav-links a {
+  color:#00ff00;
+  text-decoration:none;
+  margin-left:20px;
+  font-size:14px;
+  transition:all 0.3s;
+}
+.nav-links a:hover {
+  text-shadow:0 0 10px #00ff00;
+  color:#fff;
+}
+/* Hero Section */
+.hero {
+  text-align:center;
+  padding:80px 0;
+}
+.hero h1 {
+  font-size:48px;
+  color:#00ff00;
+  text-shadow:0 0 20px #00ff00;
+  margin-bottom:10px;
+}
+.hero .subtitle {
+  font-size:18px;
+  color:#00cc00;
+  margin-bottom:30px;
+}
+.typing {
+  font-size:16px;
+  color:#00ff00;
+  border-right:2px solid #00ff00;
+  white-space:nowrap;
+  overflow:hidden;
+  animation:typing 3s steps(40) infinite,
+             blink 0.75s step-end infinite;
+  display:inline-block;
+}
+@keyframes typing {
+  0%,100% { width:0 }
+  50% { width:100% }
+}
+@keyframes blink {
+  50% { border-color:transparent }
+}
+.btn {
+  display:inline-block;
+  margin-top:30px;
+  padding:12px 30px;
+  border:2px solid #00ff00;
+  color:#00ff00;
+  text-decoration:none;
+  font-family:'Courier New',monospace;
+  font-size:16px;
+  transition:all 0.3s;
+  cursor:pointer;
+  background:transparent;
+}
+.btn:hover {
+  background:#00ff00;
+  color:#000;
+  box-shadow:0 0 20px #00ff00;
+}
+/* About Section */
+.section {
+  padding:60px 0;
+  border-bottom:1px solid #003300;
+}
+.section h2 {
+  font-size:28px;
+  color:#00ff00;
+  text-shadow:0 0 10px #00ff00;
+  margin-bottom:30px;
+}
+.section h2::before {
+  content:"// ";
+  color:#006600;
+}
+.about-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:30px;
+}
+.about-text p {
+  color:#00cc00;
+  line-height:1.8;
+  margin-bottom:15px;
+}
+.terminal-box {
+  background:#001100;
+  border:1px solid #00ff00;
+  padding:20px;
+  border-radius:5px;
+}
+.terminal-box .prompt {
+  color:#00ff00;
+}
+.terminal-box .cmd {
+  color:#00cc00;
+}
+/* Skills Section */
+.skills-grid {
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:20px;
+}
+.skill-card {
+  background:#001100;
+  border:1px solid #006600;
+  padding:20px;
+  text-align:center;
+  transition:all 0.3s;
+  border-radius:5px;
+}
+.skill-card:hover {
+  border-color:#00ff00;
+  box-shadow:0 0 15px #003300;
+  transform:translateY(-5px);
+}
+.skill-card .icon {
+  font-size:36px;
+  margin-bottom:10px;
+}
+.skill-card h3 {
+  color:#00ff00;
+  margin-bottom:8px;
+  font-size:14px;
+}
+.skill-card p {
+  color:#006600;
+  font-size:12px;
+}
+/* Tools Section */
+.tools-list {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px;
+}
+.tool-item {
+  background:#001100;
+  border-left:3px solid #00ff00;
+  padding:15px;
+  display:flex;
+  align-items:center;
+  gap:15px;
+}
+.tool-item .tool-name {
+  color:#00ff00;
+  font-weight:bold;
+  font-size:14px;
+}
+.tool-item .tool-desc {
+  color:#006600;
+  font-size:12px;
+}
+/* Contact Section */
+.contact-box {
+  background:#001100;
+  border:1px solid #00ff00;
+  padding:30px;
+  text-align:center;
+  border-radius:5px;
+}
+.contact-box p {
+  color:#00cc00;
+  margin-bottom:20px;
+  line-height:1.8;
+}
+/* Footer */
+footer {
+  text-align:center;
+  padding:30px 0;
+  color:#006600;
+  font-size:12px;
+  border-top:1px solid #003300;
+}
+/* Glitch effect */
+.glitch {
+  animation:glitch 3s infinite;
+}
+@keyframes glitch {
+  0%,90%,100% { transform:none; text-shadow:0 0 20px #00ff00; }
+  92% { transform:skew(-1deg); text-shadow:-2px 0 #ff0000; }
+  94% { transform:skew(1deg); text-shadow:2px 0 #0000ff; }
+  96% { transform:none; text-shadow:0 0 20px #00ff00; }
+}
+</style>
 </head>
 <body>
-    <canvas id="matrix"></canvas>
-    <div class="container">
-        <div class="section">
-            <h2>Core Identity</h2>
-            <p>LEAD: <span class="value">0ff1c14l Ta0h1deforce</span></p>
-            <p>ORG: <span class="value">T40sugS1gn1</span></p>
-        </div>
-        <div class="section">
-            <h2>Field Ops</h2>
-            <p>AGENT: <span class="value">Niko Ismail (Last)</span></p>
-            <p>LOC: <span class="value">Semporna, Sabah</span></p>
-        </div>
-    </div>
-    <script>
-        const canvas = document.getElementById('matrix');
-        const ctx = canvas.getContext('2d');
-        canvas.width = window.innerWidth; canvas.height = window.innerHeight;
-        const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*";
-        const fontSize = 16; const columns = canvas.width / fontSize;
-        const drops = []; for (let i = 0; i < columns; i++) drops[i] = 1;
-        function draw() {
-            ctx.fillStyle = "rgba(0, 0, 0, 0.05)"; ctx.fillRect(0, 0, canvas.width, canvas.height);
-            ctx.fillStyle = "#0f0"; ctx.font = fontSize + "px monospace";
-            for (let i = 0; i < drops.length; i++) {
-                const text = letters.charAt(Math.floor(Math.random() * letters.length));
-                ctx.fillText(text, i * fontSize, drops[i] * fontSize);
-                if (drops[i] * fontSize > canvas.height && Math.random() > 0.975) drops[i] = 0;
-                drops[i]++;
-            }
-        }
-        setInterval(draw, 33);
-    </script>
-</body>
-</html>
+<canvas id="matrix"></canvas>
+<div class="container">
 
+  <!-- NAV -->
+  <nav>
+    <div class="logo">&gt; Official_Whysign</div>
+    <div class="nav-links">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#tools">Tools</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <div class="hero">
+    <h1 class="glitch">OFFICIAL WHYSIGN</h1>
+    <p class="subtitle">[ Cybersecurity Researcher & Ethical Hacker ]</p>
+    <div class="typing">root@kali:~# Securing the digital world...</div>
+    <br>
+    <a href="#about" class="btn">&gt; ENTER_SYSTEM</a>
+  </div>
+
+  <!-- ABOUT -->
+  <div class="section" id="about">
+    <h2>About Me</h2>
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Cybersecurity researcher dengan passion dalam dunia ethical hacking dan penetration testing.</p>
+        <p>Menggunakan Kali Linux NetHunter pada Android untuk mobile security research.</p>
+        <p>Komited dalam pembelajaran berterusan dan berkongsi ilmu keselamatan siber.</p>
+      </div>
+      <div class="terminal-box">
+        <p class="prompt">root@kali:~$ whoami</p>
+        <p class="cmd">Official Whysign</p>
+        <p class="prompt">root@kali:~$ uname -a</p>
+        <p class="cmd">Linux kali 4.14 aarch64</p>
+        <p class="prompt">root@kali:~$ cat role.txt</p>
+        <p class="cmd">Cybersecurity Researcher</p>
+        <p class="prompt">root@kali:~$ _</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- SKILLS -->
+  <div class="section" id="skills">
+    <h2>Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-card">
+        <div class="icon">🔍</div>
+        <h3>OSINT</h3>
+        <p>Open Source Intelligence & Reconnaissance</p>
+      </div>
+      <div class="skill-card">
+        <div class="icon">🌐</div>
+        <h3>Web Security</h3>
+        <p>Penetration Testing & Vulnerability Assessment</p>
+      </div>
+      <div class="skill-card">
+        <div class="icon">📡</div>
+        <h3>Network Analysis</h3>
+        <p>Traffic Analysis & Network Scanning</p>
+      </div>
+      <div class="skill-card">
+        <div class="icon">🔐</div>
+        <h3>Cryptography</h3>
+        <p>Encryption & Security Protocols</p>
+      </div>
+      <div class="skill-card">
+        <div class="icon">📱</div>
+        <h3>Mobile Security</h3>
+        <p>Android Security & NetHunter</p>
+      </div>
+      <div class="skill-card">
+        <div class="icon">🛡️</div>
+        <h3>Defense</h3>
+        <p>Firewall & Anonymity Tools</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOLS -->
+  <div class="section" id="tools">
+    <h2>Tools Arsenal</h2>
+    <div class="tools-list">
+      <div class="tool-item">
+        <div>
+          <div class="tool-name">&gt; Kali NetHunter</div>
+          <div class="tool-desc">Mobile penetration testing platform</div>
+        </div>
+      </div>
+      <div class="tool-item">
+        <div>
+          <div class="tool-name">&gt; Metasploit</div>
+          <div class="tool-desc">Exploitation framework</div>
+        </div>
+      </div>
+      <div class="tool-item">
+        <div>
+          <div class="tool-name">&gt; Nmap</div>
+          <div class="tool-desc">Network scanner & port analysis</div>
+        </div>
+      </div>
+      <div class="tool-item">
+        <div>
+          <div class="tool-name">&gt; ARGUS OSINT</div>
+          <div class="tool-desc">Open source intelligence toolkit</div>
+        </div>
+      </div>
+      <div class="tool-item">
+        <div>
+          <div class="tool-name">&gt; InviZible Pro</div>
+          <div class="tool-desc">Tor + DNSCrypt + I2P anonymity</div>
+        </div>
+      </div>
+      <div class="tool-item">
+        <div>
+          <div class="tool-name">&gt; Aircrack-ng</div>
+          <div class="tool-desc">WiFi security auditing</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTACT -->
+  <div class="section" id="contact">
+    <h2>Contact</h2>
+    <div class="contact-box">
+      <p>Untuk collaboration, security research,<br>atau sebarang pertanyaan — hubungi saya.</p>
+      <a href="#" class="btn">&gt; SEND_MESSAGE</a>
+    </div>
+  </div>
+
+  <footer>
+    <p>&gt; Official Whysign © 2026 | Cybersecurity Researcher</p>
+    <p>root@kali:~$ echo "Stay ethical, stay secure"</p>
+  </footer>
+
+</div>
+
+<script>
+// Matrix Rain Effect
+const canvas = document.getElementById('matrix');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%^&*()';
+const fontSize = 14;
+const columns = canvas.width / fontSize;
+const drops = Array(Math.floor(columns)).fill(1);
+function drawMatrix() {
+  ctx.fillStyle = 'rgba(0,0,0,0.05)';
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+  ctx.fillStyle = '#00ff00';
+  ctx.font = fontSize + 'px monospace';
+  drops.forEach((y, i) => {
+    const char = chars[Math.floor(Math.random() * chars.length)];
+    ctx.fillText(char, i * fontSize, y * fontSize);
+    if (y * fontSize > canvas.height && Math.random() > 0.975)
+      drops[i] = 0;
+    drops[i]++;
+  });
+}
+setInterval(drawMatrix, 35);
+window.addEventListener('resize', () => {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+});
+</script>
+</body>
+    </html>
